@@ -8,5 +8,7 @@ f.pack()
 simon=SimonClass(f,width=500,height=500)
 simon.grid(column=0,row=0)
 
+simon=SimonClass(f,width=300,height=300)
+simon.grid(column=1,row=0)
 
 root.mainloop()
