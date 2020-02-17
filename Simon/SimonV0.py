@@ -39,25 +39,30 @@ canvas.create_oval(150-10,150-10,350+10,350+10,fill="lightgrey")
 
 
 
-# point1=[[126,56],[30,187],[30,240],[120,240],[120,213],[165,150],[177,136],[210,134],[210,55]]
-# canvas.create_polygon(point1,fill="green")
-point=[[-126,-56],[-30,-187],[-30,-240],[-120,-240],[-120,-213],[-165,-150],[-177,-136],[-210,-134],[-210,-55],[-126,-55]]
+point1=[[126,56],[30,187],[30,240],[120,240],[120,213],[165,150],[177,136],[210,134],[210,55]]
+#point=[[-126,56],[-30,187],[-30,240],[-120,240],[-120,213],[-165,150],[-177,136],[-210,134],[-210,55],[-126,56]]
 
-homogenize(point)
-to=gettranslation(250,250)
+homogenize(point1)
 
+to=gettranslation(-250,-250)
+t=np.dot(point1, to).tolist()
 
-#color={"green":"#039E03","blue":"#0564BD","red":"#BD0B05","yellow":"#D8CC09"}
-color=["yellow","green","blue","red"]
+color=["green","blue","red","yellow"]
 cont=0
+dehomogenize(t)
+canvas.create_polygon(t,fill="green")
+print(t)
+homogenize(t)
 for rot in range(0,360,90):
+    tras=gettranslation(250,250)
     rotation =getrotation(rot)
-    transform = np.dot(rotation, to)
+    transform = np.dot(rotation, tras).tolist()
     temp = list()
-    for i in range(len(point)):
-        temp.append(np.dot(point[i], transform).tolist())
+    for i in range(len(point1)):
+        temp.append(np.dot(t[i], transform).tolist())
 
     dehomogenize(temp)
+
     canvas.create_polygon(temp, fill=color[cont], width=4)
     cont+=1
 
@@ -73,11 +78,4 @@ canvas.create_oval(290-2,260-2,320+2,290+2,fill="black")
 canvas.create_text(310,250,fill="black",font="Arial 8 bold",text="scores")
 canvas.create_oval(290,260,320,290,fill="green")
 canvas.create_text(250,190,fill="black",font="Arial 20 bold",text="SIMÓN")
-
-
-
-
-
-canvas.bind("<Button-1>", lambda e:print(e.x,e.y))
-
 root.mainloop()

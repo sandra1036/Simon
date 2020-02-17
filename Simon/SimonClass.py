@@ -126,8 +126,7 @@ class SimonClass(Canvas):
         #     self.dehomogenize(temp)
         #     self.figu=self.create_polygon(temp, fill=color[cont], width=4)
         #     cont+=1
-        #
-        #
+
         point= [[170-2,260-2],[200+2,290+2]]
         self.homogenize(point)
         needle = np.dot(point, self.scale).tolist()
